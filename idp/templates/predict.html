@@ -1,0 +1,88 @@
+{% load custom_filters %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generated Meal Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        /* Add some basic styling to the division boxes */
+        .meal-type {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 50%;
+            margin: 0 auto;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
+        .food-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .food-item img {
+            margin: 5px;
+            max-width: 100px;
+            max-height: 100px;
+        }
+        .food-details {
+            margin-left: 20px;
+        }
+        h1, h2, h3 {
+            margin: 10px;
+        }
+
+        /* Add spacing between division boxes */
+        .meal-type:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generated Meal Plan</h1>
+
+    <h2>Calorie Intake: {{ calorie_intake }}</h2>
+    <h2>Total Calories in Meal Plan: {{ total_calories }}</h2>
+    <!--<h2>Calorie Difference: {{ calorie_difference }}</h2> -->
+
+    <h3>Suggested Meals:</h3>
+
+    {% for meal in suggested_meals %}
+        
+         
+         <div class="meal-type">
+
+            
+            <h3><u>{{ meal.1 }} (Total Calories: {{ meal.calorie }})</u></h3>
+
+
+            <div class="food-item">
+                {% for food in meal.foods %}
+                    <div>
+                        <img src="{{ food.image }}" alt="{{ food.foodName }}" width="100" height="100">
+                        <div class="food-details">
+                            <strong>Food Name:</strong> {{ food.foodName }} <br>
+                            <strong>Calories:</strong> {{ food.calories }} <br>
+                            
+                            <strong>Carbohydrates:</strong> {{ food.carbohydrates }} g <br>
+                            <strong>Protein:</strong> {{ food.protein }} g <br>
+                            <strong>Fat:</strong> {{ food.fat }} g <br>
+                            <strong>Fiber:</strong> {{ food.fiber }} g <br>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        
+
+    {% endfor %}
+
+</body>
+</html>
